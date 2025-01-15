@@ -9,10 +9,13 @@ import TodoTaskUpdateForm from "./TodoTaskUpdateForm";
 function MainContent() {
   const todos = useSelector((state) => state.todos.todos);
   const [activeTodoId, setActiveTodoId] = useState(null);
-  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    console.log("123");
+    setActiveTodoId(null);
+  };
 
   const handleAddTaskClick = (id) => {
-    setOpen(!open);
     setActiveTodoId(activeTodoId === id ? null : id);
   };
   return (
@@ -43,12 +46,7 @@ function MainContent() {
               </div>
               <div className="fixed right-0 h-[90%] top-16 z-[99]">
                 {activeTodoId === todo.id && (
-                  <TodoTaskUpdateForm
-                    todo={todo}
-                    activeTodoId={activeTodoId}
-                    setOpen={setOpen}
-                    open={open}
-                  />
+                  <TodoTaskUpdateForm todo={todo} handleClose={handleClose} />
                 )}
               </div>
             </div>

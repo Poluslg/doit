@@ -91,7 +91,7 @@ function MainContentAddTask() {
               </form>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
+              <button onClick={handleClose}>Cancel</button>
               <button type="submit" onClick={createTask}>
                 Create
               </button>

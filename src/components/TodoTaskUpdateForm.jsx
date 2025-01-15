@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateTodoTask } from "../store/todoSlice";
 import { removeTodoTask } from "../store/todoSlice";
 
-function TodoTaskUpdateForm(todo, setOpen, open) {
+function TodoTaskUpdateForm({ todo, handleClose }) {
   const [completed, setCompleted] = useState(false);
   const [star, setStar] = useState(false);
   const [addStep, setAddStep] = useState(false);
@@ -30,7 +30,6 @@ function TodoTaskUpdateForm(todo, setOpen, open) {
 
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos.todos);
-
   const handlesubmit = (e) => {
     const calendervaluee = calendervalue.toString();
     e.preventDefault();
@@ -53,7 +52,7 @@ function TodoTaskUpdateForm(todo, setOpen, open) {
   console.log(todos);
   const handleDelete = (e) => {
     e.preventDefault();
-    dispatch(removeTodoTask(todo.todo.id));
+    dispatch(removeTodoTask(todo?.id));
   };
   return (
     <div
@@ -72,7 +71,7 @@ function TodoTaskUpdateForm(todo, setOpen, open) {
               id="Buy groceries"
               onChange={(e) => setCompleted(e.target.checked)}
             />
-            <h1 className="uppercase">{todo.todo.text}</h1>
+            <h1 className="uppercase">{todo?.text}</h1>
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -198,13 +197,13 @@ function TodoTaskUpdateForm(todo, setOpen, open) {
         </div>
 
         <div className="flex items-center justify-evenly h-10">
-          <button>
+          <button className="" onClick={() => handleClose("123")}>
             <CloseOutlinedIcon />
           </button>
           <button type="submit" className="w-60">
             Update Task
           </button>
-          <button onClick={handleDelete}>
+          <button>
             <DeleteForeverOutlinedIcon />
           </button>
         </div>
