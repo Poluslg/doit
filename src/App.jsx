@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [islogin, setIsLogin] = useState(false);
-
   useEffect(() => {
     const nameStore = localStorage.getItem("name");
     const passWordStore = localStorage.getItem("password");
@@ -18,19 +17,19 @@ function App() {
   }, [islogin]);
 
   return (
-    <>
+    <main>
       {islogin ? (
-        <main className="p-4 flex overflow-hidden gap-5">
+        <div className="p-4 flex overflow-hidden gap-5">
           <div className="relative ">
             <Header />
             <SideBar />
           </div>
           <MainContent />
-        </main>
+        </div>
       ) : (
         <Login />
       )}
-    </>
+    </main>
   );
 }
 
