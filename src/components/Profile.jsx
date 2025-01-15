@@ -11,7 +11,7 @@ function Profile() {
     <div className="w-48 absolute top-24 left-16">
       <button onClick={handleProfileAvaterClickl}>
         <img
-          src="/src/assets/UserPhoto.png"
+          src="/UserPhoto.png"
           alt=""
           className="h-32 w-32 rounded-full object-cover cursor-pointer outline-none"
         />

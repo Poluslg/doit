@@ -92,7 +92,7 @@ function Header() {
           <MenuOutlinedIcon />
         </button>
         <div className="flex items-center gap-2 cursor-pointer">
-          <img src="/src/assets/Logo.png" alt="Logo" className="h-6 w-6" />
+          <img src="/Logo.png" alt="Logo" className="h-6 w-6" />
           <h1 className="text-green-600 font-bold text-xl">DoIt</h1>
         </div>
       </div>
