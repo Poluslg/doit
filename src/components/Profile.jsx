@@ -7,6 +7,11 @@ function Profile() {
     setListItem(!listitem);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("name");
+    window.location.reload();
+  };
+
   return (
     <div className="w-48 absolute top-24 left-16">
       <button onClick={handleProfileAvaterClickl}>
@@ -21,10 +26,16 @@ function Profile() {
           listitem ? "block" : "hidden"
         } absolute bg-[#EEF6EF] dark:bg-[#242424] text-black dark:text-white  w-48 z-50 shadow-md`}
       >
-        <ListItemButton onClick={() => console.log("Profile")} className="dark:hover:bg-[#3d3d3d]">
+        <ListItemButton
+          onClick={() => console.log("Profile")}
+          className="dark:hover:bg-[#3d3d3d]"
+        >
           <ListItemText primary="My Profile" />
         </ListItemButton>
-        <ListItemButton onClick={() => console.log("Logout")} className="dark:hover:bg-[#3d3d3d]">
+        <ListItemButton
+          onClick={handleLogout}
+          className="dark:hover:bg-[#3d3d3d]"
+        >
           <ListItemText primary="Logout" />
         </ListItemButton>
       </div>
