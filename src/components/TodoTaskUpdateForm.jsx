@@ -12,9 +12,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { useDispatch, useSelector } from "react-redux";
-import updateTodoTask from "../store/todoSlice";
-import removeTodoTask from "../store/todoSlice";
-
+import { updateTodoTask } from "../store/todoSlice";
+import { removeTodoTask } from "../store/todoSlice";
 
 function TodoTaskUpdateForm(todo) {
   const [completed, setCompleted] = useState(false);

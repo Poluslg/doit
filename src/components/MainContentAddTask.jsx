@@ -10,8 +10,8 @@ import {
   DialogTitle,
   Slide,
 } from "@mui/material";
-import  addTodoTask  from "../store/todoSlice";
 import { useDispatch } from "react-redux";
+import { addTodoTask } from "../store/todoSlice";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -97,7 +97,6 @@ function MainContentAddTask() {
           </Dialog>
         </div>
       </div>
-   
     </>
   );
 }

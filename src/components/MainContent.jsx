@@ -8,7 +8,7 @@ import TodoTaskUpdateForm from "./TodoTaskUpdateForm";
 
 function MainContent() {
   const todos = useSelector((state) => state.todos.todos);
-  const [activeTodoId, setActiveTodoId] = useState<number | null>(null);
+  const [activeTodoId, setActiveTodoId] = useState(null);
 
   const handleAddTaskClick = (id) => {
     setActiveTodoId(activeTodoId === id ? null : id);
