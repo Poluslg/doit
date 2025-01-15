@@ -1,7 +1,7 @@
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import MainContent from "./components/MainContent";
-import Login from "./components/form/login";
+import Login from "./components/form/Login";
 import { useEffect, useState } from "react";
 
 function App() {
