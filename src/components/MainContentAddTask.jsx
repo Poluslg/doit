@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { addTodoTask } from "../store/todoSlice";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -45,8 +46,9 @@ function MainContentAddTask() {
     <>
       <div className="h-56 w-full flex flex-col justify-between bg-[#EEF6EF] dark:bg-[#242424] text-black">
         <div className="h-5 w-full bg-[#FBFDFC] dark:bg-[#232323] shadow-sm shadow-[#FBFDFC]">
-          <h1 className="text-[#142E159E] dark:text-[#357937] text-xs font-semibold ">
-            To Do v
+          <h1 className="text-[#142E159E] dark:text-[#357937] text-xs font-semibold flex items-center ">
+            To Do
+            <ArrowDropDownIcon className="-ml-1"/>
           </h1>
         </div>
         <div className="text-[#1B281BB8] dark:text-white font-semibold p-4">
@@ -78,7 +80,7 @@ function MainContentAddTask() {
             aria-describedby="alert-dialog-slide-description"
           >
             <DialogTitle>{"Enter Task"}</DialogTitle>
-            <DialogContent className="w-96">
+            <DialogContent className="lg:w-96 md:w-72">
               <form onSubmit={createTask}>
                 <input
                   type="text"

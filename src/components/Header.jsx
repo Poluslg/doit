@@ -3,7 +3,7 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CloudIcon from "@mui/icons-material/Cloud";
 import {
   Dialog,
@@ -27,7 +27,8 @@ function Header() {
   const [widgets, setWidgets] = useState(true);
   const [open, setOpen] = useState(false);
   const [city, setCity] = useState(String);
-  const [weather, setWeather] = useState(null);
+  const [localStoreWeather, setLocalStoretWeather] = useState(null);
+  const [weatherError, setWeatherError] = useState(null);
   const API_KEY = "75c748a4f73fde273b420c40e0d600de";
   const API_URL = "https://api.openweathermap.org/data/2.5/weather";
 
@@ -51,12 +52,43 @@ function Header() {
     if (header) {
       headers?.classList.add("-translate-x-full", "opacity-0", "hidden");
     } else {
+      headers?.classList.add("flex");
       headers?.classList.remove("-translate-x-full", "opacity-0", "hidden");
     }
   };
 
   const handleWidgetsClick = () => {
-    setWidgets(!widgets);
+    const widgetss = document.getElementById("widgets");
+    const innerWidgets = document.getElementsByClassName("innerWidgets");
+    setWidgets((prevWidgets) => {
+      const newWidgetsState = !prevWidgets;
+      if (newWidgetsState) {
+        widgetss?.classList.add(
+          "grid",
+          "grid-cols-1",
+          "md:grid-cols-3",
+          "gap-4",
+          "p-6"
+        );
+        for (let i = 0; i < innerWidgets.length; i++) {
+          innerWidgets[i].classList.add("h-44", "border");
+          innerWidgets[i].classList.remove("h-14", "border-b-2");
+        }
+      } else {
+        widgetss?.classList.remove(
+          "grid",
+          "grid-cols-1",
+          "md:grid-cols-3",
+          "gap-4",
+          "p-6"
+        );
+        for (let i = 0; i < innerWidgets.length; i++) {
+          innerWidgets[i].classList.remove("h-44", "border");
+          innerWidgets[i].classList.add("h-14", "border-b-2");
+        }
+      }
+      return newWidgetsState;
+    });
   };
 
   const handleClickOpen = () => {
@@ -77,13 +109,24 @@ function Header() {
           units: "metric",
         },
       });
-      setWeather(response.data);
+      if (response.status === 200) {
+        localStorage.setItem("weather", JSON.stringify(response.data));
+      }
     } catch (err) {
-      setWeather(null);
+      setWeatherError(err);
     }
     handleClose();
   };
-  const currentWeather = weather && parseFloat(weather?.main?.temp).toFixed(0);
+  const checkWeather = () => {
+    const weatherData = localStorage.getItem("weather");
+    setLocalStoretWeather(weatherData ? JSON.parse(weatherData) : null);
+  };
+  useEffect(() => {
+    checkWeather();
+  }, []);
+
+  const currentWeather =
+    localStoreWeather && parseFloat(localStoreWeather?.main?.temp).toFixed(0);
 
   return (
     <header className="h-10 w-full bg-white dark:bg-[#242424] dark:text-white  flex items-center justify-between px-4 pr-8 fixed">
@@ -132,38 +175,51 @@ function Header() {
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
+       
       >
-        <DialogTitle>{"Weather"}</DialogTitle>
-        <DialogContent className="w-96">
+        <DialogTitle className=" bg-[#35793729] text-[#357937] dark:bg-[#242424] dark:text-white">{"Weather"}</DialogTitle>
+        <DialogContent className="lg:w-96 md:w-72 bg-[#35793729] text-[#357937] dark:bg-[#242424] dark:text-white">
           <form onSubmit={createWeather}>
             <input
               type="text"
-              className="h-12 w-full p-2 border"
+              className="h-12 w-full p-2 border bg-transparent text-[#357937]  dark:text-white dark:outline-none dark:border-none"
               placeholder="Enter City Name"
               onChange={(e) => setCity(e.target.value)}
             />
           </form>
           <DialogContentText>
-            {weather && (
-              <div className="pt-2 p-1 py-2 overflow-x-hidden">
-                <h1>Feel Like -{weather?.main?.feels_like.toFixed(0)}</h1>
-                <h1>Grnd Level -{weather?.main?.grnd_level.toFixed(0)}</h1>
-                <h1>Humidity -{weather?.main?.humidity.toFixed(0)}</h1>
-                <h1>Pressure -{weather?.main?.pressure.toFixed(0)}</h1>
-                <h1>Sea Level -{weather?.main?.sea_level.toFixed(0)}</h1>
-                <h1>Temperature -{weather?.main?.temp.toFixed(0)}</h1>
+            {localStoreWeather && (
+              <div className="pt-2 p-1 py-2 overflow-x-hidden  text-[#357937]  dark:text-white">
                 <h1>
-                  Maximum Temperature -{weather?.main?.temp_max.toFixed(0)}
+                  Feel Like = {localStoreWeather?.main?.feels_like.toFixed(0)}
                 </h1>
                 <h1>
-                  Minimum Temperature -{weather?.main?.temp_min.toFixed(0)}
+                  Grnd Level = {localStoreWeather?.main?.grnd_level.toFixed(0)}
+                </h1>
+                <h1>
+                  Humidity = {localStoreWeather?.main?.humidity.toFixed(0)}
+                </h1>
+                <h1>
+                  Pressure = {localStoreWeather?.main?.pressure.toFixed(0)}
+                </h1>
+                <h1>
+                  Sea Level = {localStoreWeather?.main?.sea_level.toFixed(0)}
+                </h1>
+                <h1>Temperature = {localStoreWeather?.main?.temp.toFixed(0)}</h1>
+                <h1>
+                  Maximum Temperature = 
+                  {localStoreWeather?.main?.temp_max.toFixed(0)}
+                </h1>
+                <h1>
+                  Minimum Temperature = 
+                  {localStoreWeather?.main?.temp_min.toFixed(0)}
                 </h1>
               </div>
             )}
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          {/* <button onClick={handleClose}>Cancel</button> */}
+        <DialogActions className=" bg-[#35793729] text-[#357937] dark:bg-[#242424] dark:text-white flex gap-5">
+          <button onClick={handleClose}>Cancel</button>
           <button type="submit" onClick={createWeather}>
             Submit
           </button>

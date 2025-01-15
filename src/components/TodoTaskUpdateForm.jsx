@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateTodoTask } from "../store/todoSlice";
 import { removeTodoTask } from "../store/todoSlice";
 
-function TodoTaskUpdateForm(todo) {
+function TodoTaskUpdateForm(todo, setOpen, open) {
   const [completed, setCompleted] = useState(false);
   const [star, setStar] = useState(false);
   const [addStep, setAddStep] = useState(false);
@@ -25,6 +25,8 @@ function TodoTaskUpdateForm(todo) {
   const [dueDate, setDueDate] = useState(false);
   const [repeat, setRepeat] = useState(false);
   const [repeatValue, setRepeatValue] = useState(String);
+  const [pirority, setPriority] = useState(false);
+  const [pirorityValue, setPriorityValue] = useState(String);
 
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos.todos);
@@ -42,11 +44,13 @@ function TodoTaskUpdateForm(todo) {
         dueDate,
         repeat,
         repeatValue,
+        pirorityValue,
         calendervaluee,
       })
     );
   };
 
+  console.log(todos);
   const handleDelete = (e) => {
     e.preventDefault();
     dispatch(removeTodoTask(todo.todo.id));
@@ -160,6 +164,27 @@ function TodoTaskUpdateForm(todo) {
               </select>
             </div>
           )}
+          <div
+            className="h-12 border-b-2  w-full flex items-center justify-start pl-8 gap-10 font-semibold cursor-pointer text-[#1B281B] dark:text-[#F5F5F5]"
+            onClick={() => setPriority(!pirority)}
+          >
+            <StarBorderOutlinedIcon className="text-gray-600 dark:text-[#F5F5F5]" />
+            Piroty
+          </div>
+          {pirority && (
+            <div className=" border-b-2  w-full flex items-center justify-start pl-8 gap-10 ">
+              <select
+                name="repeat"
+                id="repeat"
+                className="w-full h-12 bg-[#EEF6EF] dark:bg-[#2C2C2C] dark:text-white outline-none pl-2 font-semibold"
+                onChange={(e) => setPriorityValue(e.target.value)}
+              >
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+          )}
           <div>
             <textarea
               name="notes"
@@ -171,6 +196,7 @@ function TodoTaskUpdateForm(todo) {
             ></textarea>
           </div>
         </div>
+
         <div className="flex items-center justify-evenly h-10">
           <button>
             <CloseOutlinedIcon />

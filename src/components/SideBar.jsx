@@ -6,7 +6,7 @@ import SidebarDonutChart from "./SidebarDonutChart";
 function SideBar() {
   return (
     <div
-      className="h-full w-64 bg-[#EEF6EF] dark:bg-[#3b3b3b] mt-40 flex items-center justify-center"
+      className="h-full w-64 bg-[#EEF6EF] dark:bg-[#3b3b3b] mt-40  items-center justify-center -translate-x-full opacity-0 hidden"
       id="header"
     >
       <Profile />

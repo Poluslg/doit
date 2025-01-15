@@ -9,19 +9,21 @@ import TodoTaskUpdateForm from "./TodoTaskUpdateForm";
 function MainContent() {
   const todos = useSelector((state) => state.todos.todos);
   const [activeTodoId, setActiveTodoId] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const handleAddTaskClick = (id) => {
+    setOpen(!open);
     setActiveTodoId(activeTodoId === id ? null : id);
   };
   return (
     <div className="w-full h-auto dark:text-white pt-10 flex flex-row">
       <div className="w-full">
         <MainContentAddTask />
-        <div className="w-full">
+        <div className="w-full  " id="widgets">
           {todos.map((todo) => (
             <div className="flex" key={todo.id}>
               <div
-                className="w-full h-14 border-b-2 flex items-center justify-between px-5 cursor-pointer gap-1 pl-3"
+                className="w-full h-14 border-b-2 flex items-center justify-between px-5 cursor-pointer gap-1 pl-3 innerWidgets"
                 onClick={() => handleAddTaskClick(todo.id)}
               >
                 <div className="flex gap-3">
@@ -43,8 +45,9 @@ function MainContent() {
                 {activeTodoId === todo.id && (
                   <TodoTaskUpdateForm
                     todo={todo}
-                    setActiveTodoId={setActiveTodoId}
                     activeTodoId={activeTodoId}
+                    setOpen={setOpen}
+                    open={open}
                   />
                 )}
               </div>
