@@ -8,8 +8,7 @@ function App() {
   const [islogin, setIsLogin] = useState(false);
   useEffect(() => {
     const nameStore = localStorage.getItem("name");
-    const passWordStore = localStorage.getItem("password");
-    if (nameStore && passWordStore) {
+    if (nameStore) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
