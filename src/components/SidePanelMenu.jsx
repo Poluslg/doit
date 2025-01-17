@@ -35,7 +35,7 @@ function SidePanelMenu() {
     },
   ];
 
-  console.log(selectedNav);
+  // console.log(selectedNav);
   return (
     <div className="h-auto w-56 bg-[#FBFDFC] dark:bg-[#232323] py-2 pt-7">
       {navigations.map((nav, index) => (

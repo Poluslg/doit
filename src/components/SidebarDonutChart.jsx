@@ -4,13 +4,13 @@ import { useSelector } from "react-redux";
 
 function SidebarDonutChart() {
   const todos = useSelector((state) => state.todos.todos);
-  const todoCompleted = todos
-    .map((todo) => todo.completed)
-    .filter((todo) => todo).length;
+  // const todoCompleted = todos
+  //   .map((todo) => todo.completed)
+  //   .filter((todo) => todo).length;
   // console.log(todoCompleted);
   // console.log(todos)
   const totalTasks = todos.length;
-  const completedTasks = todoCompleted;
+  const completedTasks = todoCompleted || 1;
   const pendingTasks = totalTasks - completedTasks;
   const palette = ["#3F9142", "#142E15"];
   return (

@@ -12,7 +12,7 @@ function CompleteTask(todos) {
           <h1 className="py-5">Completed</h1>
           {todos.todos.map(
             (todo) =>
-              todo.completed && (
+              todo.completed  && (
                 <div
                   key={todo.id}
                   className="w-full h-14 border-b-2 flex items-center justify-between px-5 cursor-pointer gap-1 pl-3"

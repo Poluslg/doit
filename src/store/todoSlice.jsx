@@ -4,7 +4,6 @@ const loadTodosFromLocalStorage = () => {
   const storedTodos = localStorage.getItem("todos");
   return storedTodos ? JSON.parse(storedTodos) : [];
 };
-
 const saveTodosToLocalStorage = (todos) => {
   localStorage.setItem("todos", JSON.stringify(todos));
 };
@@ -18,7 +17,7 @@ const todoSlice = createSlice({
   initialState,
   reducers: {
     addTodoTask: (state, action) => {
-      const newTodo = {
+      const todos = {
         id: new Date().toISOString(),
         text: action.payload.text,
         completed: false,
@@ -28,15 +27,14 @@ const todoSlice = createSlice({
         reminder: false,
         dueDate: false,
         repeat: false,
-        priority: "",
         repeatValue: "",
         calendervaluee: "",
       };
-      state.todos.push(newTodo);
+      state.todos.push(todos);
       saveTodosToLocalStorage(state.todos);
     },
     updateTodoTask: (state, action) => {
-      const todo = state.todos.find((t) => t.id);
+      const todo = state.todos.find((t) => t.id === action.payload.id);
       if (todo) {
         todo.completed = action.payload.completed;
         todo.star = action.payload.star;
@@ -46,7 +44,6 @@ const todoSlice = createSlice({
         todo.dueDate = action.payload.dueDate;
         todo.repeat = action.payload.repeat;
         todo.repeatValue = action.payload.repeatValue;
-        todo.priority = action.payload.pirorityValue;
         todo.calendervaluee = action.payload.calendervaluee;
         saveTodosToLocalStorage(state.todos);
       }

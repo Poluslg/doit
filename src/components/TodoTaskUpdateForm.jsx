@@ -29,27 +29,28 @@ function TodoTaskUpdateForm({ todo, handleClose }) {
   const [pirorityValue, setPriorityValue] = useState(String);
 
   const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todos.todos);
   const handlesubmit = (e) => {
-    const calendervaluee = calendervalue.toString();
     e.preventDefault();
+    // console.log(todo);
+    const calendervaluee = calendervalue.toString();
     dispatch(
       updateTodoTask({
-        completed,
-        star,
-        addStep,
-        setpsValue,
-        reminder,
-        dueDate,
-        repeat,
-        repeatValue,
-        pirorityValue,
-        calendervaluee,
+        id: todo?.id,
+        completed: completed,
+        star: star,
+        addStep: addStep,
+        setpsValue: setpsValue,
+        reminder: reminder,
+        dueDate: dueDate,
+        repeat: repeat,
+        repeatValue: repeatValue,
+        pirorityValue: pirorityValue,
+        calendervaluee: calendervaluee,
       })
     );
   };
 
-  console.log(todos);
+  // console.log(completed);
   const handleDelete = (e) => {
     e.preventDefault();
     dispatch(removeTodoTask(todo?.id));
