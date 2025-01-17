@@ -17,7 +17,7 @@ function SideBar() {
         </div>
         <SidePanelMenu />
         <SidebarTaskAddButton />
-        {/* <SidebarDonutChart /> */}
+        <SidebarDonutChart />
       </div>
     </div>
   );

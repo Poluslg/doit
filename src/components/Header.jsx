@@ -175,9 +175,10 @@ function Header() {
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
-       
       >
-        <DialogTitle className=" bg-[#35793729] text-[#357937] dark:bg-[#242424] dark:text-white">{"Weather"}</DialogTitle>
+        <DialogTitle className=" bg-[#35793729] text-[#357937] dark:bg-[#242424] dark:text-white">
+          {("Weather", localStoreWeather && localStoreWeather.name)}
+        </DialogTitle>
         <DialogContent className="lg:w-96 md:w-72 bg-[#35793729] text-[#357937] dark:bg-[#242424] dark:text-white">
           <form onSubmit={createWeather}>
             <input
@@ -205,13 +206,15 @@ function Header() {
                 <h1>
                   Sea Level = {localStoreWeather?.main?.sea_level.toFixed(0)}
                 </h1>
-                <h1>Temperature = {localStoreWeather?.main?.temp.toFixed(0)}</h1>
                 <h1>
-                  Maximum Temperature = 
+                  Temperature = {localStoreWeather?.main?.temp.toFixed(0)}
+                </h1>
+                <h1>
+                  Maximum Temperature =
                   {localStoreWeather?.main?.temp_max.toFixed(0)}
                 </h1>
                 <h1>
-                  Minimum Temperature = 
+                  Minimum Temperature =
                   {localStoreWeather?.main?.temp_min.toFixed(0)}
                 </h1>
               </div>

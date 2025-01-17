@@ -44,7 +44,7 @@ function SidePanelMenu() {
             onClick={() => setSelectedNav(nav.name)}
             color="secondary"
             className={`w-full flex items-center gap-2 px-3 py-2 font-semibold text-[#1B281B] dark:text-white hover:text-[#357937] hover:bg-[#35793729] transition-colors duration-300 rounded-md ${
-              selectedNav === nav.name && "bg-[#35793729] text-[#357937] "
+              nav.name === "Today" && "bg-[#35793729] text-[#357937] "
             }`}
           >
             {nav.icon}
