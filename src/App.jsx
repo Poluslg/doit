@@ -22,19 +22,22 @@ function App() {
   return (
     <BrowserRouter>
       <main>
-        <div className="p-4 flex overflow-hidden gap-5">
-          <div className="relative ">
-            <Header />
-            <SideBar />
+        {islogin ? (
+          <div className="p-4 flex overflow-hidden gap-5">
+            <div className="relative ">
+              <Header />
+              <SideBar />
+            </div>
+            <Routes>
+              <Route path="/" element={<MainContent />} />
+              <Route path="/today" element={<TodayTask />} />
+              <Route path="/importent" element={<Importent />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
           </div>
-          <Routes>
-            <Route path="/" element={<MainContent />} />
-            <Route path="/today" element={<TodayTask />} />
-            <Route path="/importent" element={<Importent />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </div>
-        {!islogin && <Login />}
+        ) : (
+          <Login />
+        )}
       </main>
     </BrowserRouter>
   );
