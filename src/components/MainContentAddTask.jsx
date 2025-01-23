@@ -33,11 +33,13 @@ function MainContentAddTask() {
 
   const createTask = (e) => {
     e.preventDefault();
-    dispatch(
-      addTodoTask({
-        text: text,
-      })
-    );
+    if (text) {
+      dispatch(
+        addTodoTask({
+          text: text,
+        })
+      );
+    }
     setText("");
     handleClose();
   };
@@ -48,7 +50,7 @@ function MainContentAddTask() {
         <div className="h-5 w-full bg-[#FBFDFC] dark:bg-[#232323] shadow-sm shadow-[#FBFDFC]">
           <h1 className="text-[#142E159E] dark:text-[#357937] text-xs font-semibold flex items-center ">
             To Do
-            <ArrowDropDownIcon className="-ml-1"/>
+            <ArrowDropDownIcon className="-ml-1" />
           </h1>
         </div>
         <div className="text-[#1B281BB8] dark:text-white font-semibold p-4">
@@ -60,12 +62,6 @@ function MainContentAddTask() {
             <RepeatOutlinedIcon className="text-[#808181]" />
             <CalendarTodayOutlinedIcon className="text-[#808181]" />
           </div>
-          {/* <button
-          onClick={handleAddTaskClick}
-          className="uppercase h-10 w-28 rounded-md bg-[#35793729] text-[#357937] hover:bg-[#91b192] transition-colors text-sm font-semibold"
-        >
-          Add Task
-        </button> */}
           <button
             onClick={handleClickOpen}
             className="uppercase h-10 w-28 rounded-md bg-[#35793729] text-[#357937] hover:bg-[#91b192] transition-colors text-sm font-semibold"
@@ -86,6 +82,7 @@ function MainContentAddTask() {
                   type="text"
                   className="h-12 w-full p-2 border"
                   placeholder="Enter Task Name"
+                  value={text}
                   onChange={(e) => setText(e.target.value)}
                 />
               </form>

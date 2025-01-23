@@ -12,7 +12,7 @@ function SidebarDonutChart() {
   const totalTasks = todos.length;
   const completedTasks = todoCompleted;
   const pendingTasks = totalTasks - completedTasks;
-  const palette = ["#3F9142", "#142E15"];
+  const palette = ["#142E15", "#3F9142"];
   return (
     <div className="h-56 w-56 bg-[#FBFDFC] dark:bg-[#232323] dark:text-white flex flex-col pt-1 mb-28">
       <div className="h-16 w-full border-b border-gray-200 flex items-center justify-between px-4">

@@ -16,9 +16,9 @@ import {
 } from "@mui/material";
 import axios from "axios";
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+// const Transition = React.forwardRef(function Transition(props, ref) {
+//   return <Slide direction="up" ref={ref} {...props} />;
+// });
 
 function Header() {
   const [mode, setMode] = useState("light");
@@ -117,6 +117,7 @@ function Header() {
     }
     handleClose();
   };
+
   const checkWeather = () => {
     const weatherData = localStorage.getItem("weather");
     setLocalStoretWeather(weatherData ? JSON.parse(weatherData) : null);
@@ -129,10 +130,11 @@ function Header() {
     localStoreWeather && parseFloat(localStoreWeather?.main?.temp).toFixed(0);
 
   return (
-    <header className="h-10 w-full bg-white dark:bg-[#242424] dark:text-white  flex items-center justify-between px-4 pr-8 fixed">
+    <header className="h-14 w-full bg-white dark:bg-[#242424] dark:text-white  flex items-center justify-between px-4 pr-8 fixed top-0 py-2 z-20">
       <div className="flex items-center gap-3">
         <button onClick={headerOnClick}>
           <MenuOutlinedIcon />
+          <span className="sr-only">Menu button</span>
         </button>
         <div className="flex items-center gap-2 cursor-pointer">
           <img src="/Logo.png" alt="Logo" className="h-6 w-6" />
@@ -157,7 +159,6 @@ function Header() {
         </button>
         <button onClick={handleWidgetsClick}>
           {widgets ? <WidgetsOutlinedIcon /> : <MenuOutlinedIcon />}
-
           <span className="sr-only">widgets</span>
         </button>
         <button onClick={handleModeToggle}>
@@ -171,7 +172,7 @@ function Header() {
       </div>
       <Dialog
         open={open}
-        TransitionComponent={Transition}
+        // TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
@@ -190,33 +191,58 @@ function Header() {
           </form>
           <DialogContentText>
             {localStoreWeather && (
-              <div className="pt-2 p-1 py-2 overflow-x-hidden  text-[#357937]  dark:text-white">
-                <h1>
-                  Feel Like = {localStoreWeather?.main?.feels_like.toFixed(0)}
-                </h1>
-                <h1>
-                  Grnd Level = {localStoreWeather?.main?.grnd_level.toFixed(0)}
-                </h1>
-                <h1>
-                  Humidity = {localStoreWeather?.main?.humidity.toFixed(0)}
-                </h1>
-                <h1>
-                  Pressure = {localStoreWeather?.main?.pressure.toFixed(0)}
-                </h1>
-                <h1>
-                  Sea Level = {localStoreWeather?.main?.sea_level.toFixed(0)}
-                </h1>
-                <h1>
-                  Temperature = {localStoreWeather?.main?.temp.toFixed(0)}
-                </h1>
-                <h1>
-                  Maximum Temperature =
-                  {localStoreWeather?.main?.temp_max.toFixed(0)}
-                </h1>
-                <h1>
-                  Minimum Temperature =
-                  {localStoreWeather?.main?.temp_min.toFixed(0)}
-                </h1>
+              <div className="pt-4 p-3 rounded-lg shadow-lg bg-[#e6f4ea] dark:bg-[#1e293b] text-[#2d6a4f] dark:text-[#d1d5db]">
+                <h2 className="text-xl font-bold mb-3">Weather Details</h2>
+                <ul className="space-y-2">
+                  <li className="flex justify-between border-b pb-1">
+                    <span>Feels Like:</span>
+                    <span className="font-semibold">
+                      {localStoreWeather?.main?.feels_like.toFixed(0)}°C
+                    </span>
+                  </li>
+                  <li className="flex justify-between border-b pb-1">
+                    <span>Ground Level:</span>
+                    <span className="font-semibold">
+                      {localStoreWeather?.main?.grnd_level.toFixed(0)}
+                    </span>
+                  </li>
+                  <li className="flex justify-between border-b pb-1">
+                    <span>Humidity:</span>
+                    <span className="font-semibold">
+                      {localStoreWeather?.main?.humidity.toFixed(0)}%
+                    </span>
+                  </li>
+                  <li className="flex justify-between border-b pb-1">
+                    <span>Pressure:</span>
+                    <span className="font-semibold">
+                      {localStoreWeather?.main?.pressure.toFixed(0)} hPa
+                    </span>
+                  </li>
+                  <li className="flex justify-between border-b pb-1">
+                    <span>Sea Level:</span>
+                    <span className="font-semibold">
+                      {localStoreWeather?.main?.sea_level.toFixed(0)} hPa
+                    </span>
+                  </li>
+                  <li className="flex justify-between border-b pb-1">
+                    <span>Temperature:</span>
+                    <span className="font-semibold">
+                      {localStoreWeather?.main?.temp.toFixed(0)}°C
+                    </span>
+                  </li>
+                  <li className="flex justify-between border-b pb-1">
+                    <span>Max Temperature:</span>
+                    <span className="font-semibold">
+                      {localStoreWeather?.main?.temp_max.toFixed(0)}°C
+                    </span>
+                  </li>
+                  <li className="flex justify-between">
+                    <span>Min Temperature:</span>
+                    <span className="font-semibold">
+                      {localStoreWeather?.main?.temp_min.toFixed(0)}°C
+                    </span>
+                  </li>
+                </ul>
               </div>
             )}
           </DialogContentText>

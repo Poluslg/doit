@@ -13,7 +13,7 @@ function Profile() {
   };
 
   return (
-    <div className="w-48 absolute top-24 left-16">
+    <div className="w-48 absolute top-24 left-16 z-10">
       <button onClick={handleProfileAvaterClickl}>
         <img
           src="/UserPhoto.png"

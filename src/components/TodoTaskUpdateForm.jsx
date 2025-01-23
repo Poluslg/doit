@@ -29,9 +29,9 @@ function TodoTaskUpdateForm({ todo, handleClose }) {
   const [pirorityValue, setPriorityValue] = useState(String);
 
   const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todos.todos);
   const handlesubmit = (e) => {
     e.preventDefault();
-    // console.log(todo);
     const calendervaluee = calendervalue.toString();
     dispatch(
       updateTodoTask({
@@ -55,6 +55,7 @@ function TodoTaskUpdateForm({ todo, handleClose }) {
     e.preventDefault();
     dispatch(removeTodoTask(todo?.id));
   };
+
   return (
     <div
       id="addTask"
@@ -79,11 +80,12 @@ function TodoTaskUpdateForm({ todo, handleClose }) {
                 setStar(!star);
               }}
             >
-              {star ? (
+              {todo.star ? (
                 <StarOutlinedIcon className=" text-[#000000] dark:text-[#ffffff]" />
               ) : (
                 <StarBorderOutlinedIcon />
               )}
+              <span className="sr-only">Star</span>
             </button>
           </div>
           <div
@@ -204,7 +206,7 @@ function TodoTaskUpdateForm({ todo, handleClose }) {
           <button type="submit" className="w-60">
             Update Task
           </button>
-          <button>
+          <button onClick={handleDelete}>
             <DeleteForeverOutlinedIcon />
           </button>
         </div>

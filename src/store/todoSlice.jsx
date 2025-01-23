@@ -24,6 +24,7 @@ const todoSlice = createSlice({
         star: false,
         addStep: false,
         setpsValue: "",
+        Date: new Date().toLocaleDateString(),
         reminder: false,
         dueDate: false,
         repeat: false,
